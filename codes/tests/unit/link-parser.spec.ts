@@ -1,6 +1,6 @@
 import {  isNext,lastPage } from "@/core/link-parser"
 
-describe('link-parser tests', () => {
+describe('link-parser', () => {
 
     const isNextLinks = [
         [`<https://api.github.com/organizations/6128107/repos?per_page=50&sort=updated&page=2>; rel="next", <https://api.github.com/organizations/6128107/repos?per_page=50&sort=updated&page=3>; rel="last"`, 
@@ -15,7 +15,7 @@ describe('link-parser tests', () => {
     ]
 
     for (let [link, url, isAvailable] of isNextLinks) {
-        it(`When passed ${link} then "isNext" should return resource with url ${url} and isAvailable ${isAvailable}`, () => {
+        it(`should return: Resource: ${JSON.stringify({ url, isAvailable })} given arguments: link: ${link}`, () => {
             expect(isNext(link as string | null).url).toBe(url);
             expect(isNext(link as string | null).isAvailable).toBe(isAvailable);
         })
@@ -29,7 +29,7 @@ describe('link-parser tests', () => {
     ]
 
     for (let [link, page] of lastPageLinks) {
-        it(`When passed ${link} then "lastPage" should return ${page}`, () => {
+        it(`should return: ${page} given arguments: link: ${link}`, () => {
             expect(lastPage(link as string)).toBe(page);
         })
     }
